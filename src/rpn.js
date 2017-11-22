@@ -23,19 +23,7 @@ const RPNEngine = {
                 case '*':
                     return RPNEngine.operation((a,b) => { return a * b; });
                 case '/':
-                    return RPNEngine.operation((a,b) => {
-                        if (Math.abs(b) < Number.EPSILON) {
-                            if (a > 0.0) {
-                                return Number.POSITIVE_INFINITY;
-                            } else if (a < 0.0) {
-                                return Number.NEGATIVE_INFINITY;
-                            }
-
-                            return 0.0;
-                        }
-
-                        return a / b;
-                    });
+                    return RPNEngine.operation((a,b) => { return a / b; });
                 default:
                     return RPNEngine.push(input);
             }

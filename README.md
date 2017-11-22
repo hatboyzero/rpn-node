@@ -8,8 +8,8 @@ This is a node implementation of a reverse polish notation (RPN) calculator. A s
 
 To run the code, you will need to install the npm dependencies and execute the application via
 
-`npm install
-npm start`
+`npm install`
+`npm start`
 
 To run the unit tests, simply execute
 
