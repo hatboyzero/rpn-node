@@ -1,0 +1,11 @@
+{
+  "input": [
+    "1",
+    "*"
+  ],
+  "error": {
+    "statusCode": 100,
+    "message": "Invalid input sequence:\n[\n  \"1\"\n]",
+    "type": "invalidInput"
+  }
+}

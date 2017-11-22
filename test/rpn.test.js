@@ -135,4 +135,56 @@ describe('Reverse polish notation unit tests', () => {
                 }
             });
     });
+
+    it ('Rejects an invalid input sequence for addition', () => {
+        let inputs = ['1','+'];
+        return rpn.process(inputs)
+            .then(() => {
+                assert.fail();
+            })
+            .catch((error) => {
+                if (error) {
+                    test_utils.verify('rejects_an_invalid_input_sequence_for_addition', {input: inputs, error: error});
+                }
+            });
+    });
+
+    it ('Rejects an invalid input sequence for subtraction', () => {
+        let inputs = ['1','-'];
+        return rpn.process(inputs)
+            .then(() => {
+                assert.fail();
+            })
+            .catch((error) => {
+                if (error) {
+                    test_utils.verify('rejects_an_invalid_input_sequence_for_subtraction', {input: inputs, error: error});
+                }
+            });
+    });
+
+    it ('Rejects an invalid input sequence for multiplication', () => {
+        let inputs = ['1','*'];
+        return rpn.process(inputs)
+            .then(() => {
+                assert.fail();
+            })
+            .catch((error) => {
+                if (error) {
+                    test_utils.verify('rejects_an_invalid_input_sequence_for_multiplication', {input: inputs, error: error});
+                }
+            });
+    });
+
+    it ('Rejects an invalid input sequence for division', () => {
+        let inputs = ['1','/'];
+        return rpn.process(inputs)
+            .then(() => {
+                assert.fail();
+            })
+            .catch((error) => {
+                if (error) {
+                    test_utils.verify('rejects_an_invalid_input_sequence_for_division', {input: inputs, error: error});
+                }
+            });
+    });
 });

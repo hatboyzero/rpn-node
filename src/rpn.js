@@ -17,13 +17,13 @@ const RPNEngine = {
         return Promise.all(inputs.map((input) => {
             switch (input) {
                 case '+':
-                    return RPNEngine.add();
+                    return RPNEngine.operation((a,b) => { return a + b; });
                 case '-':
-                    return RPNEngine.subtract();
+                    return RPNEngine.operation((a,b) => { return a - b; });
                 case '*':
-                    return RPNEngine.multiply();
+                    return RPNEngine.operation((a,b) => { return a * b; });
                 case '/':
-                    return RPNEngine.divide();
+                    return RPNEngine.operation((a,b) => { return a / b; });
                 default:
                     return RPNEngine.push(input);
             }
@@ -32,49 +32,18 @@ const RPNEngine = {
                 return RPNEngine.stack;
             });
     },
-    add: () => {
-        return new Promise((resolve) => {
+    operation: (callback) => {
+        return new Promise((resolve, reject) => {
             if (RPNEngine.stack.length >= 2) {
                 let secondOperand = parseFloat(RPNEngine.stack.shift());
                 let firstOperand = parseFloat(RPNEngine.stack.shift());
-                RPNEngine.stack.unshift((firstOperand + secondOperand).toString());
+                RPNEngine.stack.unshift(callback(firstOperand,secondOperand).toString());
+            } else {
+                reject(RpnError.invalidInput({message: 'Invalid input sequence:\n' + JSON.stringify(RPNEngine.stack, null, 2)}));
             }
 
             resolve(RPNEngine.stack);
-        });
-    },
-    subtract: () => {
-        return new Promise((resolve) => {
-            if (RPNEngine.stack.length >= 2) {
-                let secondOperand = parseFloat(RPNEngine.stack.shift());
-                let firstOperand = parseFloat(RPNEngine.stack.shift());
-                RPNEngine.stack.unshift((firstOperand - secondOperand).toString());
-            }
-
-            resolve(RPNEngine.stack);
-        });
-    },
-    multiply: () => {
-        return new Promise((resolve) => {
-            if (RPNEngine.stack.length >= 2) {
-                let secondOperand = parseFloat(RPNEngine.stack.shift());
-                let firstOperand = parseFloat(RPNEngine.stack.shift());
-                RPNEngine.stack.unshift((firstOperand * secondOperand).toString());
-            }
-
-            resolve(RPNEngine.stack);
-        });
-    },
-    divide: () => {
-        return new Promise((resolve) => {
-            if (RPNEngine.stack.length >= 2) {
-                let secondOperand = parseFloat(RPNEngine.stack.shift());
-                let firstOperand = parseFloat(RPNEngine.stack.shift());
-                RPNEngine.stack.unshift((firstOperand / secondOperand).toString());
-            }
-
-            resolve(RPNEngine.stack);
-        });
+        })
     },
     clear: () => {
         return new Promise((resolve, reject) => {
