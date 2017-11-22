@@ -1,0 +1,4 @@
+node_modules
+test/approvals/*.received.txt
+coverage
+.idea

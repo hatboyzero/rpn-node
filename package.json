@@ -1,0 +1,17 @@
+{
+  "name": "rpn-node",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "approvals": "^2.1.2",
+    "coveralls": "^3.0.0",
+    "mocha": "^4.0.1"
+  },
+  "scripts": {
+    "start": "NODE_PATH=./src node ./src/app.js",
+    "test": "NODE_PATH=./src mocha",
+    "cover": "NODE_PATH=./src instanbul cover _mocha",
+    "coveralls": "npm run cover -- --report lcovonly && car ./coverage/lcov.info | coverall"
+  },
+  "author": "Matthew Alan Gray <mgray@hatboysoftware.com>"
+}
