@@ -3,14 +3,18 @@
 const RPNEngine = {
     stack: [],
     push: (input) => {
-        RPNEngine.stack.unshift(input);
+        if (input.match(/-?\d+\.?\d*/)) {
+            RPNEngine.stack.unshift(input);
+        }
         return RPNEngine.stack;
     },
     process: (...args) => {
         return Promise.all(args.map((input) => {
             switch (input) {
                 case '+':
-                    return RPNEngine.add(0.0);
+                    return RPNEngine.add();
+                case '-':
+                    return RPNEngine.subtract();
                 default:
                     return RPNEngine.push(input);
             }
@@ -19,13 +23,21 @@ const RPNEngine = {
                 return RPNEngine.stack;
             });
     },
-    add: (value) => {
-        if (RPNEngine.stack.length > 0 && RPNEngine.stack[0].match(/\d+\.?\d*/)) {
-            value += parseFloat(RPNEngine.stack.shift());
-            return RPNEngine.add(value);
+    add: () => {
+        if (RPNEngine.stack.length >= 2) {
+            let secondOperand = parseFloat(RPNEngine.stack.shift());
+            let firstOperand = parseFloat(RPNEngine.stack.shift());
+            RPNEngine.stack.unshift((firstOperand + secondOperand).toString());
         }
 
-        RPNEngine.push(value.toString());
+        return RPNEngine.stack;
+    },
+    subtract: () => {
+        if (RPNEngine.stack.length >= 2) {
+            let secondOperand = parseFloat(RPNEngine.stack.shift());
+            let firstOperand = parseFloat(RPNEngine.stack.shift());
+            RPNEngine.stack.unshift((firstOperand - secondOperand).toString());
+        }
 
         return RPNEngine.stack;
     },
