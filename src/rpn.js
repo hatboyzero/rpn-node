@@ -17,6 +17,8 @@ const RPNEngine = {
                     return RPNEngine.subtract();
                 case '*':
                     return RPNEngine.multiply();
+                case '/':
+                    return RPNEngine.divide();
                 default:
                     return RPNEngine.push(input);
             }
@@ -48,6 +50,15 @@ const RPNEngine = {
             let secondOperand = parseFloat(RPNEngine.stack.shift());
             let firstOperand = parseFloat(RPNEngine.stack.shift());
             RPNEngine.stack.unshift((firstOperand * secondOperand).toString());
+        }
+
+        return RPNEngine.stack;
+    },
+    divide: () => {
+        if (RPNEngine.stack.length >= 2) {
+            let secondOperand = parseFloat(RPNEngine.stack.shift());
+            let firstOperand = parseFloat(RPNEngine.stack.shift());
+            RPNEngine.stack.unshift((firstOperand / secondOperand).toString());
         }
 
         return RPNEngine.stack;
