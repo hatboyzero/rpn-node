@@ -1,0 +1,10 @@
+{
+  "input": [
+    "a"
+  ],
+  "error": {
+    "statusCode": 100,
+    "message": "Input is invalid:\n\"a\"",
+    "type": "invalidInput"
+  }
+}
