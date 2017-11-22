@@ -187,4 +187,36 @@ describe('Reverse polish notation unit tests', () => {
                 }
             });
     });
+
+    it ('Handles a divide by zero', () => {
+        let inputs = ['1', '0', '/'];
+        return rpn.process(inputs)
+            .then((result) => {
+                test_utils.verify('handles_a_divide_by_zero', {input: inputs, stack: result});
+            });
+    });
+
+    it ('Handles an infinity as input', () => {
+        let inputs = ['Infinity', '-1', '*'];
+        return rpn.process(inputs)
+            .then((result) => {
+                test_utils.verify('handles_an_infinity_as_input', {input: inputs, stack: result});
+            });
+    });
+
+    it ('Handles a negative infinity as input', () => {
+        let inputs = ['-Infinity', '-1', '*'];
+        return rpn.process(inputs)
+            .then((result) => {
+                test_utils.verify('handles_a_negative_infinity_as_input', {input: inputs, stack: result});
+            });
+    });
+
+    it ('Handles a NaN as input', () => {
+        let inputs = ['NaN', '1', '+'];
+        return rpn.process(inputs)
+            .then((result) => {
+                test_utils.verify('handles_a_nan_as_input', {input: inputs, stack: result});
+            });
+    });
 });

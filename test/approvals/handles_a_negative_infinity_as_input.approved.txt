@@ -1,0 +1,10 @@
+{
+  "input": [
+    "-Infinity",
+    "-1",
+    "*"
+  ],
+  "stack": [
+    "Infinity"
+  ]
+}
