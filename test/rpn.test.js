@@ -15,7 +15,7 @@ describe('Reverse polish notation unit tests', () => {
        let inputs = ['1'];
        return rpn.process(inputs)
            .then((result) => {
-               test_utils.verify('accepts_a_single_number_as_input', {input: inputs, stack: result});
+               test_utils.verify('accepts_a_single_number_as_input', {input: inputs, result: result});
            });
    });
 
@@ -23,7 +23,7 @@ describe('Reverse polish notation unit tests', () => {
        let inputs = ['1','2'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_two_numbers_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_two_numbers_as_input', {input: inputs, result: result});
             });
    });
 
@@ -31,7 +31,7 @@ describe('Reverse polish notation unit tests', () => {
        let inputs = ['1','2','+'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_two_numbers_and_an_addition_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_two_numbers_and_an_addition_operator_as_input', {input: inputs, result: result});
             });
    });
 
@@ -39,7 +39,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','+'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_one_addition_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_one_addition_operator_as_input', {input: inputs, result: result});
             });
     });
 
@@ -47,7 +47,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','+','+'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_two_addition_operators_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_two_addition_operators_as_input', {input: inputs, result: result});
             });
    });
 
@@ -55,7 +55,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','-'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_two_numbers_and_a_subtraction_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_two_numbers_and_a_subtraction_operator_as_input', {input: inputs, result: result});
             })
    });
 
@@ -63,7 +63,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','-'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_a_subtraction_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_a_subtraction_operator_as_input', {input: inputs, result: result});
             });
    });
 
@@ -71,7 +71,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','-','-'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_two_subtraction_operators_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_two_subtraction_operators_as_input', {input: inputs, result: result});
             });
    });
 
@@ -79,7 +79,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','*'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_two_numbers_and_a_multiplication_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_two_numbers_and_a_multiplication_operator_as_input', {input: inputs, result: result});
             })
     });
 
@@ -87,7 +87,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','*'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_a_multiplication_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_a_multiplication_operator_as_input', {input: inputs, result: result});
             });
     });
 
@@ -95,7 +95,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','*','*'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_two_multiplication_operators_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_two_multiplication_operators_as_input', {input: inputs, result: result});
             });
     });
 
@@ -103,7 +103,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','/'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_two_numbers_and_a_divisionn_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_two_numbers_and_a_divisionn_operator_as_input', {input: inputs, result: result});
             })
     });
 
@@ -111,7 +111,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','/'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_a_division_operator_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_a_division_operator_as_input', {input: inputs, result: result});
             });
     });
 
@@ -119,7 +119,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1','2','3','/','/'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('accepts_three_numbers_and_two_division_operators_as_input', {input: inputs, stack: result});
+                test_utils.verify('accepts_three_numbers_and_two_division_operators_as_input', {input: inputs, result: result});
             });
     });
 
@@ -192,7 +192,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['1', '0', '/'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('handles_a_divide_by_zero', {input: inputs, stack: result});
+                test_utils.verify('handles_a_divide_by_zero', {input: inputs, result: result});
             });
     });
 
@@ -200,7 +200,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['Infinity', '-1', '*'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('handles_an_infinity_as_input', {input: inputs, stack: result});
+                test_utils.verify('handles_an_infinity_as_input', {input: inputs, result: result});
             });
     });
 
@@ -208,7 +208,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['-Infinity', '-1', '*'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('handles_a_negative_infinity_as_input', {input: inputs, stack: result});
+                test_utils.verify('handles_a_negative_infinity_as_input', {input: inputs, result: result});
             });
     });
 
@@ -216,7 +216,7 @@ describe('Reverse polish notation unit tests', () => {
         let inputs = ['NaN', '1', '+'];
         return rpn.process(inputs)
             .then((result) => {
-                test_utils.verify('handles_a_nan_as_input', {input: inputs, stack: result});
+                test_utils.verify('handles_a_nan_as_input', {input: inputs, result: result});
             });
     });
 });

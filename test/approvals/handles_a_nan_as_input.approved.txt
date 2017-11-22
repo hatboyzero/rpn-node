@@ -4,7 +4,10 @@
     "1",
     "+"
   ],
-  "stack": [
-    "NaN"
-  ]
+  "result": {
+    "stack": [
+      "NaN"
+    ],
+    "result": "NaN"
+  }
 }
