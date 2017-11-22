@@ -1,6 +1,6 @@
 {
   "name": "rpn-node",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {},
   "devDependencies": {
     "approvals": "^2.1.2",

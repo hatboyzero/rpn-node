@@ -31,4 +31,39 @@ describe('Reverse polish notation unit tests', () => {
                 test_utils.verify('accepts_two_numbers_and_an_addition_operator_as_input', result);
             });
    });
+
+    it('Accepts three numbers and one addition operator as input', () => {
+        return rpn.process('1', '2', '3', '+')
+            .then((result) => {
+                test_utils.verify('accepts_three_numbers_and_one_addition_operator_as_input', result);
+            });
+    });
+
+   it('Accepts three numbers and two addition operators as input', () => {
+        return rpn.process('1', '2', '3', '+', '+')
+            .then((result) => {
+                test_utils.verify('accepts_three_numbers_and_two_addition_operators_as_input', result);
+            });
+   });
+
+   it ('Accepts two numbers and a subtraction operator as input', () => {
+        return rpn.process('1', '2', '-')
+            .then((result) => {
+                test_utils.verify('accepts_two_numbers_and_a_subtraction_operator_as_input', result);
+            })
+   });
+
+   it ('Accepts three numbers and a subtraction operator as input', () => {
+        return rpn.process('1', '2', '3', '-')
+            .then((result) => {
+                test_utils.verify('accepts_three_numbers_and_a_subtraction_operator_as_input', result);
+            });
+   });
+
+   it ('Accepts three numbers and two subtraction operators as input', () => {
+        return rpn.process('1', '2', '3', '-', '-')
+            .then((result) => {
+                test_utils.verify('accepts_three_numbers_and_two_subtraction_operators_as_input', result);
+            });
+   });
 });
