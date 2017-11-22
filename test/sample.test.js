@@ -12,7 +12,6 @@ describe ('Sample approval test', () => {
     });
 
     it ('Runs a test', () => {
-        command.main();
-        test_utils.verify('runs_a_test', 'foo')
+        test_utils.verify('runs_a_test', command.main());
     });
 });

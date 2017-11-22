@@ -2,6 +2,6 @@
 
 module.exports = {
     main: () => {
-        console.log('Hello world!');
+        return 'Hello world!';
     }
 };

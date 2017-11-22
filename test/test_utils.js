@@ -1,4 +1,5 @@
 'use strict';
+let rpn = require('rpn');
 let approvals = require('approvals');
 let approvalsConfig = approvals.getConfig({appendEOL: false});
 approvals.configure(approvalsConfig);
@@ -9,9 +10,11 @@ let env = {
 };
 
 function setUp() {
+    return rpn.clear();
 }
 
 function tearDown() {
+    return rpn.clear();
 }
 
 let outputDir = __dirname + '/approvals';

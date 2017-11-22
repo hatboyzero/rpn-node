@@ -1,4 +1,4 @@
 'use strict';
 let command = require('command');
 
-command.main();
+console.log(command.main());
