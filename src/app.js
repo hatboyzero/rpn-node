@@ -1,3 +1,4 @@
 'use strict';
+let command = require('command');
 
-console.log('Hello World!');
+command.main();

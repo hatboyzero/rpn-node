@@ -1,4 +1,5 @@
 'use strict';
+let command = require('command');
 let test_utils = require('./test_utils');
 
 describe ('Sample approval test', () => {
@@ -11,6 +12,7 @@ describe ('Sample approval test', () => {
     });
 
     it ('Runs a test', () => {
+        command.main();
         test_utils.verify('runs_a_test', 'foo')
     });
 });
