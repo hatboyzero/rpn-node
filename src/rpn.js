@@ -1,24 +1,29 @@
 'use strict';
+let RpnError = require('errors');
 
 const RPNEngine = {
     stack: [],
     push: (input) => {
-        if (input.match(/-?\d+\.?\d*/)) {
-            RPNEngine.stack.unshift(input);
-        }
-        return RPNEngine.stack;
+        return new Promise((resolve, reject) => {
+            if (input.match(/-?\d+\.?\d*/)) {
+                RPNEngine.stack.unshift(input);
+                resolve(RPNEngine.stack);
+            }
+
+            reject(RpnError.invalidInput({message: "Input is invalid:\n" + JSON.stringify(input,null,2)}));
+        });
     },
-    process: (...args) => {
-        return Promise.all(args.map((input) => {
+    process: (inputs) => {
+        return Promise.all(inputs.map((input) => {
             switch (input) {
                 case '+':
-                    return RPNEngine.add();
+                    return RPNEngine.operation((a,b) => { return a + b; });
                 case '-':
-                    return RPNEngine.subtract();
+                    return RPNEngine.operation((a,b) => { return a - b; });
                 case '*':
-                    return RPNEngine.multiply();
+                    return RPNEngine.operation((a,b) => { return a * b; });
                 case '/':
-                    return RPNEngine.divide();
+                    return RPNEngine.operation((a,b) => { return a / b; });
                 default:
                     return RPNEngine.push(input);
             }
@@ -27,41 +32,18 @@ const RPNEngine = {
                 return RPNEngine.stack;
             });
     },
-    add: () => {
-        if (RPNEngine.stack.length >= 2) {
-            let secondOperand = parseFloat(RPNEngine.stack.shift());
-            let firstOperand = parseFloat(RPNEngine.stack.shift());
-            RPNEngine.stack.unshift((firstOperand + secondOperand).toString());
-        }
+    operation: (callback) => {
+        return new Promise((resolve, reject) => {
+            if (RPNEngine.stack.length >= 2) {
+                let secondOperand = parseFloat(RPNEngine.stack.shift());
+                let firstOperand = parseFloat(RPNEngine.stack.shift());
+                RPNEngine.stack.unshift(callback(firstOperand,secondOperand).toString());
+            } else {
+                reject(RpnError.invalidInput({message: 'Invalid input sequence:\n' + JSON.stringify(RPNEngine.stack, null, 2)}));
+            }
 
-        return RPNEngine.stack;
-    },
-    subtract: () => {
-        if (RPNEngine.stack.length >= 2) {
-            let secondOperand = parseFloat(RPNEngine.stack.shift());
-            let firstOperand = parseFloat(RPNEngine.stack.shift());
-            RPNEngine.stack.unshift((firstOperand - secondOperand).toString());
-        }
-
-        return RPNEngine.stack;
-    },
-    multiply: () => {
-        if (RPNEngine.stack.length >= 2) {
-            let secondOperand = parseFloat(RPNEngine.stack.shift());
-            let firstOperand = parseFloat(RPNEngine.stack.shift());
-            RPNEngine.stack.unshift((firstOperand * secondOperand).toString());
-        }
-
-        return RPNEngine.stack;
-    },
-    divide: () => {
-        if (RPNEngine.stack.length >= 2) {
-            let secondOperand = parseFloat(RPNEngine.stack.shift());
-            let firstOperand = parseFloat(RPNEngine.stack.shift());
-            RPNEngine.stack.unshift((firstOperand / secondOperand).toString());
-        }
-
-        return RPNEngine.stack;
+            resolve(RPNEngine.stack);
+        })
     },
     clear: () => {
         return new Promise((resolve, reject) => {
