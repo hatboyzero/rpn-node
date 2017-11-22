@@ -11,7 +11,7 @@ To run the code, you will need to install the npm dependencies and execute the a
 `npm install
 npm start`
 
-To run the unit tests
+To run the unit tests, simply execute
 
 `npm test`
 
