@@ -7,7 +7,7 @@ const RPNEngine = {
         return new Promise((resolve, reject) => {
             if (input.match(/-?\d+\.?\d*|-?Infinity|NaN/)) {
                 RPNEngine.stack.unshift(input);
-                resolve(RPNEngine.stack);
+                resolve({stack: RPNEngine.stack});
             }
 
             reject(RpnError.invalidInput({message: "Input is invalid:\n" + JSON.stringify(input,null,2)}));
@@ -40,27 +40,29 @@ const RPNEngine = {
                     return RPNEngine.push(input);
             }
         }))
-            .then(() => {
-                return RPNEngine.stack;
-            });
+        .then((result) => {
+            return result.pop();
+        });
     },
     operation: (callback) => {
         return new Promise((resolve, reject) => {
             if (RPNEngine.stack.length >= 2) {
                 let secondOperand = parseFloat(RPNEngine.stack.shift());
                 let firstOperand = parseFloat(RPNEngine.stack.shift());
-                RPNEngine.stack.unshift(callback(firstOperand,secondOperand).toString());
+                let result = callback(firstOperand,secondOperand).toString()
+                RPNEngine.stack.unshift(result);
+                resolve({stack: RPNEngine.stack, result: result});
             } else {
                 reject(RpnError.invalidInput({message: 'Invalid input sequence:\n' + JSON.stringify(RPNEngine.stack, null, 2)}));
             }
 
-            resolve(RPNEngine.stack);
+            resolve({stack: RPNEngine.stack});
         })
     },
     clear: () => {
         return new Promise((resolve, reject) => {
             RPNEngine.stack.length = 0;
-            resolve(RPNEngine.stack);
+            resolve({stack: RPNEngine.stack});
         });
     }
 };

@@ -4,7 +4,10 @@
     "-1",
     "*"
   ],
-  "stack": [
-    "Infinity"
-  ]
+  "result": {
+    "stack": [
+      "Infinity"
+    ],
+    "result": "Infinity"
+  }
 }
