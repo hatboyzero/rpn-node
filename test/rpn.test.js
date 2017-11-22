@@ -87,4 +87,25 @@ describe('Reverse polish notation unit tests', () => {
                 test_utils.verify('accepts_three_numbers_and_two_multiplication_operators_as_input', result);
             });
     });
+
+    it ('Accepts two numbers and a division operator as input', () => {
+        return rpn.process('1', '2', '/')
+            .then((result) => {
+                test_utils.verify('accepts_two_numbers_and_a_divisionn_operator_as_input', result);
+            })
+    });
+
+    it ('Accepts three numbers and a division operator as input', () => {
+        return rpn.process('1', '2', '3', '/')
+            .then((result) => {
+                test_utils.verify('accepts_three_numbers_and_a_division_operator_as_input', result);
+            });
+    });
+
+    it ('Accepts three numbers and two division operators as input', () => {
+        return rpn.process('1', '2', '3', '/', '/')
+            .then((result) => {
+                test_utils.verify('accepts_three_numbers_and_two_division_operators_as_input', result);
+            });
+    });
 });
